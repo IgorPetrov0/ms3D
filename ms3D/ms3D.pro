@@ -25,10 +25,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    gameworld.cpp \
+    gameobject.cpp \
+    gamesector.cpp \
+    gameObjectComponents/mesh.cpp \
+    gameObjectComponents/phythicobject.cpp \
+    widgets/viewwidget.cpp \
+    gameObjectComponents/texture.cpp \
+    gameObjectComponents/material.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    gameworld.h \
+    gameobject.h \
+    gamesector.h \
+    gameObjectComponents/mesh.h \
+    gameObjectComponents/phythicobject.h \
+    widgets/viewwidget.h \
+    gameObjectComponents/texture.h \
+    gameObjectComponents/material.h \
+    defines.h \
+    msArray.h
 
 FORMS += \
         mainwindow.ui
