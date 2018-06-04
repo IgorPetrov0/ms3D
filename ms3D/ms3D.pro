@@ -33,7 +33,12 @@ SOURCES += \
     gameObjectComponents/phythicobject.cpp \
     widgets/viewwidget.cpp \
     gameObjectComponents/texture.cpp \
-    gameObjectComponents/material.cpp
+    parsers/material.cpp \
+    parsers/parserobj.cpp \
+    parsers/sceneobject.cpp \
+    parsers/ducParser/configitem.cpp \
+    parsers/ducParser/ducparser.cpp \
+    gameObjectComponents/gameObjectMaterial.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,9 +49,14 @@ HEADERS += \
     gameObjectComponents/phythicobject.h \
     widgets/viewwidget.h \
     gameObjectComponents/texture.h \
-    gameObjectComponents/material.h \
     defines.h \
-    msArray.h
+    msArray.h \
+    parsers/material.h \
+    parsers/parserobj.h \
+    parsers/sceneobject.h \
+    parsers/ducParser/configitem.h \
+    parsers/ducParser/ducparser.h \
+    gameObjectComponents/gameObjectMaterial.h
 
 FORMS += \
         mainwindow.ui

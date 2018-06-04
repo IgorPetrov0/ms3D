@@ -31,64 +31,64 @@ void viewWidget::addMesh(mesh *model){
         return;
     }
 
-    modelsArray.append(model);
+//    modelsArray.append(model);
 
-    makeCurrent();//делаем контекст OpenGL текущим
-    //создаем общий буфер атрибутов вершин. В нем все и вертексы и нормали и текстурные координаты. см.: loader::compileGraphicObject
-    QOpenGLBuffer vBuf(QOpenGLBuffer::VertexBuffer);
-    vBuf.create();
-    vBuf.bind();
-    vBuf.setUsagePattern(QOpenGLBuffer::DynamicDraw);
-    vBuf.allocate(model->getVertexesPointer(),model->getVertexArraySize()*sizeof(float));
-    vBuf.release();
+//    makeCurrent();//делаем контекст OpenGL текущим
+//    //создаем общий буфер атрибутов вершин. В нем все и вертексы и нормали и текстурные координаты. см.: loader::compileGraphicObject
+//    QOpenGLBuffer vBuf(QOpenGLBuffer::VertexBuffer);
+//    vBuf.create();
+//    vBuf.bind();
+//    vBuf.setUsagePattern(QOpenGLBuffer::DynamicDraw);
+//    vBuf.allocate(model->getVertexesPointer(),model->getVertexArraySize()*sizeof(float));
+//    vBuf.release();
 
-    //создаем все текстуры, задействованные в сцене
-    unsigned int size=texturesVector->size();
-    for(unsigned int n=0;n!=size;n++){
-        GLuint tName;
-        glGenTextures(1,&tName);
-        glBindTexture(GL_TEXTURE_2D,tName);
-        glPixelStorei(GL_UNPACK_ALIGNMENT,1);
-        texture *tex=texturesVector->at(n);
-        tex->setOglName(tName);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex->width(),tex->height(),0,GL_RGBA,GL_UNSIGNED_BYTE,tex->getTexturePointer()->getArrayPointer());
-        //параметры фильтрации - линейная
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glBindTexture(GL_TEXTURE_2D,0);
-    }
+//    //создаем все текстуры, задействованные в сцене
+//    unsigned int size=texturesVector->size();
+//    for(unsigned int n=0;n!=size;n++){
+//        GLuint tName;
+//        glGenTextures(1,&tName);
+//        glBindTexture(GL_TEXTURE_2D,tName);
+//        glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+//        texture *tex=texturesVector->at(n);
+//        tex->setOglName(tName);
+//        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex->width(),tex->height(),0,GL_RGBA,GL_UNSIGNED_BYTE,tex->getTexturePointer()->getArrayPointer());
+//        //параметры фильтрации - линейная
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//        glBindTexture(GL_TEXTURE_2D,0);
+//    }
 
-    //создаем свой массив индексов на каждый материал
-    size=model->getMaterialsSize();
-    for(unsigned int n=0;n!=size;n++){
-        GLuint oglTmpName=0;
-        gameObjectMaterial *mPointer=model->getMaterialPointer(n);
+//    //создаем свой массив индексов на каждый материал
+//    size=model->getMaterialsSize();
+//    for(unsigned int n=0;n!=size;n++){
+//        GLuint oglTmpName=0;
+//        gameObjectMaterial *mPointer=model->getMaterialPointer(n);
 
-        glGenVertexArrays(1,&oglTmpName);//получаем свободный идентификатор
-        mPointer->setVAOName(oglTmpName);//передаем идентификатор материалу
-        glBindVertexArray(oglTmpName);//биндим VAO
+//        glGenVertexArrays(1,&oglTmpName);//получаем свободный идентификатор
+//        mPointer->setVAOName(oglTmpName);//передаем идентификатор материалу
+//        glBindVertexArray(oglTmpName);//биндим VAO
 
-        vBuf.bind();//биндим буфер атрибутов
+//        vBuf.bind();//биндим буфер атрибутов
 
-        int stride=vertex::sizeInFloat()*sizeof(float);
-        sProgram->enableAttributeArray("position");
-        sProgram->setAttributeBuffer("position",GL_FLOAT,0,3,stride);
+//        int stride=vertex::sizeInFloat()*sizeof(float);
+//        sProgram->enableAttributeArray("position");
+//        sProgram->setAttributeBuffer("position",GL_FLOAT,0,3,stride);
 
-        sProgram->enableAttributeArray("texCoord");
-        sProgram->setAttributeBuffer("texCoord",GL_FLOAT,sizeof(float)*3,2,stride);
+//        sProgram->enableAttributeArray("texCoord");
+//        sProgram->setAttributeBuffer("texCoord",GL_FLOAT,sizeof(float)*3,2,stride);
 
-        QOpenGLBuffer iBuf(QOpenGLBuffer::IndexBuffer);//создаем буфер вершинных индексов
-        iBuf.create();
-        iBuf.bind();
-        iBuf.allocate(model->getMaterialPointer(n)->getIndices()->getArrayPointer(),model->getMaterialPointer(n)->getIndecesSize()*sizeof(unsigned int));
+//        QOpenGLBuffer iBuf(QOpenGLBuffer::IndexBuffer);//создаем буфер вершинных индексов
+//        iBuf.create();
+//        iBuf.bind();
+//        iBuf.allocate(model->getMaterialPointer(n)->getIndices()->getArrayPointer(),model->getMaterialPointer(n)->getIndecesSize()*sizeof(unsigned int));
 
-        glBindVertexArray(0);//отсоединяем VAO
+//        glBindVertexArray(0);//отсоединяем VAO
 
-        vBuf.release();
-        iBuf.release();
-    }
+//        vBuf.release();
+//        iBuf.release();
+//    }
 
 }
 ////////////////////////////////////////////////////
@@ -151,20 +151,20 @@ void viewWidget::paintGL(){
         sProgram->setUniformValue(shaderMatrix,matrix);
         int mSize=modelsArray.size();
         for(int n=0;n!=mSize;n++){
-            if(modelsArray[n]->isVisible()){
-                unsigned int matSize=modelsArray[n]->getMaterialsSize();
-                for(unsigned int m=0;m!=matSize;m++){
-                    gameObjectMaterial *tmpMat=modelsArray[n]->getMaterialPointer(m);
-                    if(tmpMat->getTexture()!=NULL){//если у материала есть текстура(текстуры может и не быть.)
-                        //биндим текстуру
-                        glBindTexture(GL_TEXTURE_2D,tmpMat->getOGLTextureName());
-                    }
-                    glBindVertexArray((GLuint)tmpMat->getVAOName());
-                    glDrawElements(GL_TRIANGLES,(GLsizei)tmpMat->getIndecesSize(),GL_UNSIGNED_INT,NULL);
-                    glBindVertexArray(0);
-                    glBindTexture(GL_TEXTURE_2D,0);
-                }
-            }
+//            if(modelsArray[n]->isVisible()){
+//                unsigned int matSize=modelsArray[n]->getMaterialsSize();
+//                for(unsigned int m=0;m!=matSize;m++){
+//                    gameObjectMaterial *tmpMat=modelsArray[n]->getMaterialPointer(m);
+//                    if(tmpMat->getTexture()!=NULL){//если у материала есть текстура(текстуры может и не быть.)
+//                        //биндим текстуру
+//                        glBindTexture(GL_TEXTURE_2D,tmpMat->getOGLTextureName());
+//                    }
+//                    glBindVertexArray((GLuint)tmpMat->getVAOName());
+//                    glDrawElements(GL_TRIANGLES,(GLsizei)tmpMat->getIndecesSize(),GL_UNSIGNED_INT,NULL);
+//                    glBindVertexArray(0);
+//                    glBindTexture(GL_TEXTURE_2D,0);
+//                }
+//            }
         }
     }
 }
@@ -258,52 +258,52 @@ void viewWidget::updateView(){
 //////////////////////////////////////////////////////////////////////////////////
 void viewWidget::deleteAll(){
 
-    while(modelsArray.size()!=0){
-        graphicObject *model=modelsArray[0];
-        unsigned int f=0;
-        //удаляем VAO
-        unsigned int mSize=model->getMaterialsSize();
-        for(unsigned int n1=0;n1!=mSize;n1++){
-            f=model->getMaterialPointer(n1)->getTexture()->getOglName();
-            glDeleteTextures(1,&f);
-        }
-        //удаляем все текстуры из видеопамяти
-        unsigned int matSize=model->getMaterialsSize();
-        for(unsigned int n2=0;n2!=matSize;n2++){
-            f=model->getMaterialPointer(n2)->getOGLTextureName();
-            glDeleteVertexArrays(1,&f);
-        }
-        modelsArray.remove(0);
-    }
+//    while(modelsArray.size()!=0){
+//        graphicObject *model=modelsArray[0];
+//        unsigned int f=0;
+//        //удаляем VAO
+//        unsigned int mSize=model->getMaterialsSize();
+//        for(unsigned int n1=0;n1!=mSize;n1++){
+//            f=model->getMaterialPointer(n1)->getTexture()->getOglName();
+//            glDeleteTextures(1,&f);
+//        }
+//        //удаляем все текстуры из видеопамяти
+//        unsigned int matSize=model->getMaterialsSize();
+//        for(unsigned int n2=0;n2!=matSize;n2++){
+//            f=model->getMaterialPointer(n2)->getOGLTextureName();
+//            glDeleteVertexArrays(1,&f);
+//        }
+//        modelsArray.remove(0);
+//    }
 }
 ///////////////////////////////////////////////////////////////////////////////////
-void viewWidget::removeModel(editabelGraphicObject *model){
-    if(model!=NULL){
-        int mSize=modelsArray.size();
-        for(int n=0;n!=mSize;n++){
-            if(modelsArray[n]==model){
-                unsigned int f=0;
-                //удаляем VAO
-                unsigned int mSize=model->getMaterialsSize();
-                for(unsigned int n1=0;n1!=mSize;n1++){
-                    gameObjectTexture *tex=model->getMaterialPointer(n1)->getTexture();
-                    if(!tex->isUsed()){
-                        f=tex->getOglName();
-                        glDeleteTextures(1,&f);
-                    }
-                }
-                //удаляем все текстуры из видеопамяти
-                unsigned int matSize=model->getMaterialsSize();
-                for(unsigned int n2=0;n2!=matSize;n2++){
-                    f=model->getMaterialPointer(n2)->getOGLTextureName();
-                    glDeleteVertexArrays(1,&f);
-                }
-                modelsArray.remove(n);
-                break;
-            }
-        }
-    }
-}
+//void viewWidget::removeModel(editabelGraphicObject *model){
+//    if(model!=NULL){
+//        int mSize=modelsArray.size();
+//        for(int n=0;n!=mSize;n++){
+//            if(modelsArray[n]==model){
+//                unsigned int f=0;
+//                //удаляем VAO
+//                unsigned int mSize=model->getMaterialsSize();
+//                for(unsigned int n1=0;n1!=mSize;n1++){
+//                    gameObjectTexture *tex=model->getMaterialPointer(n1)->getTexture();
+//                    if(!tex->isUsed()){
+//                        f=tex->getOglName();
+//                        glDeleteTextures(1,&f);
+//                    }
+//                }
+//                //удаляем все текстуры из видеопамяти
+//                unsigned int matSize=model->getMaterialsSize();
+//                for(unsigned int n2=0;n2!=matSize;n2++){
+//                    f=model->getMaterialPointer(n2)->getOGLTextureName();
+//                    glDeleteVertexArrays(1,&f);
+//                }
+//                modelsArray.remove(n);
+//                break;
+//            }
+//        }
+//    }
+//}
 ///////////////////////////////////////////////////////////////////////////////////////
 void viewWidget::setDistance(float distance){
     this->distance=distance;
