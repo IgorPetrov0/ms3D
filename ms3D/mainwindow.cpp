@@ -7,8 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->addModel,SIGNAL(toggled(bool)),this,SLOT(addNewModel(bool)));
-
+    connect(ui->addModel,SIGNAL(triggered(bool)),this,SLOT(addNewModel(bool)));
 }
 /////////////////////////////////////////////////////
 MainWindow::~MainWindow()
