@@ -20,7 +20,7 @@ public:
 
 
 protected slots:
-    void addNewModel(bool a);
+    void addNewModel();
 
 
 

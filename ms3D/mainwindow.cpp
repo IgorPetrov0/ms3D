@@ -15,7 +15,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 //////////////////////////////////////////////////////////
-void MainWindow::addNewModel(bool a){
+void MainWindow::addNewModel(){
     QFileDialog dialog(this);
     QStringList fileNames;
 
