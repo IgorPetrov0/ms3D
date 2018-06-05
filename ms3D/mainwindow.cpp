@@ -28,7 +28,15 @@ void MainWindow::addNewModel(bool a){
     if(dialog.exec()){
         fileNames=dialog.selectedFiles();
     }
-    int t=0;
+    parserOBJ parser;
+    if(parser.readFile(fileNames.at(1))){
+
+    }
 
 
+
+}
+///////////////////////////////////////////////////////////////////////
+void MainWindow::setCorePointer(engineCore *corePointer){
+    this->corePointer=corePointer;
 }

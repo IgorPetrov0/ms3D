@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include "defines.h"
+#include "parsers/parserobj.h"
+#include "enginecore.h"
 
 
 namespace Ui {
@@ -16,7 +18,11 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void setCorePointer(engineCore *corePointer);
     ~MainWindow();
+
+protected:
+    engineCore *corePointer;
 
 
 protected slots:
