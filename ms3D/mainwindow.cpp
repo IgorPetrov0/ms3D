@@ -25,9 +25,15 @@ void MainWindow::addNewModel(){
     dialog.setLabelText(QFileDialog::LookIn,tr("Open 3D model"));
     dialog.setViewMode(QFileDialog::Detail);
     if(dialog.exec()){
-        fileNames=dialog.selectedFiles();
+        editorPointer->loadMesh(dialog.selectedFiles().at(0));
     }
-    int t=0;
 
 
+
+
+}
+///////////////////////////////////////////////////////////////////////
+void MainWindow::setEditorPointer(editorCore *corePointer){
+    this->editorPointer=corePointer;
+    corePointer->setViewWidget(ui->mainViewWidget);
 }

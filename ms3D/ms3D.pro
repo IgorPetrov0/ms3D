@@ -38,7 +38,10 @@ SOURCES += \
     parsers/sceneobject.cpp \
     parsers/ducParser/configitem.cpp \
     parsers/ducParser/ducparser.cpp \
-    gameObjectComponents/gameObjectMaterial.cpp
+    gameObjectComponents/gameObjectMaterial.cpp \
+    enginecore.cpp \
+    editorcore.cpp \
+    parsers/baseparser.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +59,10 @@ HEADERS += \
     parsers/sceneobject.h \
     parsers/ducParser/configitem.h \
     parsers/ducParser/ducparser.h \
-    gameObjectComponents/gameObjectMaterial.h
+    gameObjectComponents/gameObjectMaterial.h \
+    enginecore.h \
+    editorcore.h \
+    parsers/baseparser.h
 
 FORMS += \
         mainwindow.ui

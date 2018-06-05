@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include "defines.h"
+#include "editorcore.h"
 
 
 namespace Ui {
@@ -16,7 +17,11 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void setEditorPointer(editorCore *corePointer);
     ~MainWindow();
+
+protected:
+    editorCore *editorPointer;
 
 
 protected slots:

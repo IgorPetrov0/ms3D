@@ -15,10 +15,14 @@ bool parserOBJ::readFile(QString fileName){
     bool rez=false;//результат парсинга
 
     if(!file->open(QIODevice::ReadOnly|QIODevice::Text)){
+        lastError=tr("File ")+fileName+tr(" not open.");
         return rez;//если не открылся выходим с ошибкой
     }
     if(parsObj(file)){//если прочиталось
         rez=true;
+    }
+    else{
+        lastError=tr("Error parsing .obj file.");
     }
     file->close();//закрываем файл
     delete file;
@@ -262,14 +266,6 @@ bool parserOBJ::readNumbers(QString *string, QVector<float> *outVector){
 //    return 0;
 //}
 /////////////////////////////////////////////////////////////////////////////////////////////
-sceneObject* parserOBJ::getSceneObject(){
-    //указатель на объект можно запросить только раз
-    //кто запросил объект, тот и отвечает за его удаление
-    sceneObject *tmp=object;
-    object=NULL;//если указатель запрошен, то парсер его забывает
-    return tmp;
-}
-/////////////////////////////////////////////////////////////////////////////////////////////
 void parserOBJ::getAllMaterials(QVector<material *> *matArray){
 //    for(int n=0;n!=objectsArray.size();n++){
 //        for(int m=0;m!=objectsArray.at(n)->getMaterialsSize();m++){
@@ -284,3 +280,4 @@ void parserOBJ::deleteObject(){
         delete object;
     }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////
